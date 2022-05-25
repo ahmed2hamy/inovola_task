@@ -32,7 +32,12 @@ class CourseRepositoryImpl implements CourseRepository {
 
   Future<Either<Failure, Course>> _getCourseDetailsFromRemote() async {
     try {
+      ///Get course from remote
       Course course = await _remoteDataSource.getCourseDetails();
+
+      ///Cache course to local
+      _localDataSource.saveCourseToLocalData(course);
+
       return Right(course);
     } catch (e) {
       return Left(ServerFailure(e.toString()));

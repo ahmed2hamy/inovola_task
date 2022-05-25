@@ -76,6 +76,32 @@ class CourseModel extends Course {
     }
   }
 
+  factory CourseModel.fromCourse(Course course) {
+    return CourseModel(
+      id: course.id,
+      title: course.title,
+      img: course.img,
+      interest: course.interest,
+      price: course.price,
+      date: course.date,
+      address: course.address,
+      trainerName: course.trainerName,
+      trainerImg: course.trainerImg,
+      trainerInfo: course.trainerInfo,
+      occasionDetail: course.occasionDetail,
+      latitude: course.latitude,
+      longitude: course.longitude,
+      isLiked: course.isLiked,
+      isSold: course.isSold,
+      isPrivateEvent: course.isPrivateEvent,
+      hiddenCashPayment: course.hiddenCashPayment,
+      specialForm: course.specialForm,
+      questionnaire: course.questionnaire,
+      questExplanation: course.questExplanation,
+      reservTypesModelList: course.reservTypesModelList,
+    );
+  }
+
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['id'] = id;

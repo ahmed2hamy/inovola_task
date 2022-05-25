@@ -7,6 +7,7 @@ import 'package:inovola_task/features/course/data/repositories/course_repository
 import 'package:inovola_task/features/course/domain/repositories/course_reository.dart';
 import 'package:inovola_task/features/course/domain/use_cases/get_course_details_use_case.dart';
 import 'package:inovola_task/features/course/presentation/manager/course_cubit.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> injectCourseFeature(GetIt sl) async {
   ///Bloc:
@@ -35,6 +36,6 @@ Future<void> injectCourseFeature(GetIt sl) async {
     ),
   );
   sl.registerFactory<CourseLocalDataSource>(
-    () => const CourseLocalDataSourceImpl(),
+    () => CourseLocalDataSourceImpl(prefs: sl<SharedPreferences>()),
   );
 }
