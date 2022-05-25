@@ -1,5 +1,6 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:inovola_task/core/network/network_client.dart';
 import 'package:inovola_task/core/network/network_info.dart';
@@ -9,6 +10,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 final sl = GetIt.instance;
 
 Future<void> init() async {
+  ///Init Services:
+  WidgetsFlutterBinding.ensureInitialized();
+
   ///Features:
   //Course:
   injectCourseFeature(sl);

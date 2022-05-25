@@ -17,7 +17,7 @@ class CourseRemoteDataSourceImpl implements CourseRemoteDataSource {
   @override
   Future<Course> getCourseDetails() async {
     try {
-      Map<String, dynamic> res = await _networkClient.getData(kCourseEndpoint);
+      Map<String, dynamic> res = await _networkClient.getData("");
       Course course = CourseModel.fromJson(res);
       return course;
     } catch (e) {
