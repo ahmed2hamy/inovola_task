@@ -20,11 +20,11 @@ dependencies:
   dartz: ^0.10.1
   connectivity_plus: ^2.3.0
   dio: ^4.0.6
+  provider: ^6.0.3
+  intl: ^0.17.0
   shared_preferences: ^2.0.15
   cached_network_image: ^3.2.1
   carousel_slider: ^4.1.1
-  intl:
-  provider:
 
 
 dev_dependencies:
