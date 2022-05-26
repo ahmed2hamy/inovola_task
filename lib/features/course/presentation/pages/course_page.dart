@@ -22,17 +22,20 @@ class _CoursePageState extends State<CoursePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      body: BlocConsumer<CourseCubit, CourseState>(
-        listener: (context, state) {
-          if (state is CourseErrorState) {
-            Dialogs.showAppSnackBar(context: context, content: state.message);
-          }
-        },
+      body: BlocBuilder<CourseCubit, CourseState>(
         builder: (context, state) {
           if (state is CourseLoadingState) {
             return const Center(child: CircularProgressIndicator());
           } else if (state is CourseLoadedState) {
             return CoursePageLoadedWidget(course: state.course);
+          } else if (state is CourseErrorState) {
+            Dialogs.showAppSnackBar(context: context, content: state.message);
+            return Center(
+              child: IconButton(
+                onPressed: context.read<CourseCubit>().getCourseDetails,
+                icon: const Icon(Icons.refresh),
+              ),
+            );
           } else {
             return const SizedBox();
           }

@@ -36,7 +36,7 @@ class CourseLocalDataSourceImpl implements CourseLocalDataSource {
         CourseModel model = CourseModel.fromJson(jsonDecode(json));
         return model;
       } else {
-        throw (const CacheException(kErrorNotFoundString));
+        throw (CacheException(kDataNotFoundString.toString()));
       }
     } on Exception catch (e) {
       throw (CacheException(e.toString()));
