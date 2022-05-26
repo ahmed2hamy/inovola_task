@@ -1,6 +1,6 @@
 import 'package:inovola_task/constants/constants.dart';
 import 'package:inovola_task/core/error/exceptions.dart';
-import 'package:inovola_task/core/network/network_client.dart';
+import 'package:inovola_task/core/helpers/network/network_client.dart';
 import 'package:inovola_task/features/course/data/models/course_model.dart';
 import 'package:inovola_task/features/course/domain/entities/course.dart';
 
@@ -17,10 +17,10 @@ class CourseRemoteDataSourceImpl implements CourseRemoteDataSource {
   @override
   Future<Course> getCourseDetails() async {
     try {
-      Map<String, dynamic> res = await _networkClient.getData("");
+      Map<String, dynamic> res = await _networkClient.getData(kCourseEndpoint);
       Course course = CourseModel.fromJson(res);
       return course;
-    } catch (e) {
+    } on Exception catch (e) {
       throw ServerException(e.toString());
     }
   }

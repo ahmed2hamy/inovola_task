@@ -2,8 +2,8 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:inovola_task/core/network/network_client.dart';
-import 'package:inovola_task/core/network/network_info.dart';
+import 'package:inovola_task/core/helpers/network/network_client.dart';
+import 'package:inovola_task/core/helpers/network/network_info.dart';
 import 'package:inovola_task/injection_container/inject_course_feature.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

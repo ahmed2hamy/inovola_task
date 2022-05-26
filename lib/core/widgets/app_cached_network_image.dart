@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:inovola_task/core/widgets/app_paceholder.dart';
 
 class AppCachedNetworkImage extends StatelessWidget {
   final String imageUrl;
@@ -11,6 +12,13 @@ class AppCachedNetworkImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CachedNetworkImage(imageUrl: imageUrl);
+    const BoxFit fit = BoxFit.fitWidth;
+
+    return CachedNetworkImage(
+      imageUrl: imageUrl,
+      fit: fit,
+      placeholder: (context, url) => const AppPlaceholder(fit: fit),
+      errorWidget: (context, url, error) => const AppPlaceholder(fit: fit),
+    );
   }
 }

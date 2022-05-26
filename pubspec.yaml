@@ -23,6 +23,8 @@ dependencies:
   shared_preferences: ^2.0.15
   cached_network_image: ^3.2.1
   carousel_slider: ^4.1.1
+  intl:
+  provider:
 
 
 dev_dependencies:
@@ -33,3 +35,6 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  assets:
+    - images/

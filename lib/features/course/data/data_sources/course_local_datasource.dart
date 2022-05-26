@@ -23,7 +23,7 @@ class CourseLocalDataSourceImpl implements CourseLocalDataSource {
     try {
       CourseModel model = CourseModel.fromCourse(course);
       _prefs.setString(kCourseKey, jsonEncode(model.toJson()));
-    } catch (e) {
+    } on Exception catch (e) {
       throw (CacheException(e.toString()));
     }
   }
@@ -38,7 +38,7 @@ class CourseLocalDataSourceImpl implements CourseLocalDataSource {
       } else {
         throw (const CacheException(kErrorNotFoundString));
       }
-    } catch (e) {
+    } on Exception catch (e) {
       throw (CacheException(e.toString()));
     }
   }

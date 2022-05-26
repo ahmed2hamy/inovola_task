@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:inovola_task/core/widgets/app_cached_network_image.dart';
+import 'package:inovola_task/core/helpers/dialogs.dart';
 import 'package:inovola_task/features/course/presentation/manager/course_cubit.dart';
+import 'package:inovola_task/features/course/presentation/widgets/course_page_loaded_widget.dart';
 
 class CoursePage extends StatefulWidget {
   const CoursePage({Key? key}) : super(key: key);
@@ -20,17 +21,18 @@ class _CoursePageState extends State<CoursePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocBuilder<CourseCubit, CourseState>(
+      extendBodyBehindAppBar: true,
+      body: BlocConsumer<CourseCubit, CourseState>(
+        listener: (context, state) {
+          if (state is CourseErrorState) {
+            Dialogs.showAppSnackBar(context: context, content: state.message);
+          }
+        },
         builder: (context, state) {
-          if (state is CourseLoadedState) {
-            final List<String> imagesList = state.course.img ?? [];
-
-            return PageView.builder(
-              itemCount: imagesList.length,
-              itemBuilder: (context, index) {
-                return AppCachedNetworkImage(imageUrl: imagesList[index]);
-              },
-            );
+          if (state is CourseLoadingState) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (state is CourseLoadedState) {
+            return CoursePageLoadedWidget(course: state.course);
           } else {
             return const SizedBox();
           }

@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
+import 'package:inovola_task/core/error/exceptions.dart';
 import 'package:inovola_task/core/error/failures.dart';
-import 'package:inovola_task/core/network/network_info.dart';
+import 'package:inovola_task/core/helpers/network/network_info.dart';
 import 'package:inovola_task/features/course/data/data_sources/course_local_datasource.dart';
 import 'package:inovola_task/features/course/data/data_sources/course_remote_datasource.dart';
 import 'package:inovola_task/features/course/domain/entities/course.dart';
@@ -39,8 +40,10 @@ class CourseRepositoryImpl implements CourseRepository {
       _localDataSource.saveCourseToLocalData(course);
 
       return Right(course);
-    } catch (e) {
-      return Left(ServerFailure(e.toString()));
+    } on ServerException catch (e) {
+      return Left(ServerFailure(e.message));
+    } on CacheException catch (e) {
+      return Left(CacheFailure(e.message));
     }
   }
 
@@ -48,8 +51,8 @@ class CourseRepositoryImpl implements CourseRepository {
     try {
       Course course = await _localDataSource.getCourseDetails();
       return Right(course);
-    } catch (e) {
-      return Left(CacheFailure(e.toString()));
+    } on CacheException catch (e) {
+      return Left(CacheFailure(e.message));
     }
   }
 }
